@@ -1,6 +1,8 @@
 # ghostmark
 
-![Ghostmark Logo](assets/icons/ghostmark.png)
+<p align="center">
+  <img src="assets/icons/ghostmark.png" width="175" alt="Ghostmark Logo">
+</p>
 
 [![Built with Zig](https://img.shields.io/badge/built%20with-Zig-yellow?style=flat&logo=zig)](https://ziglang.org/)
 [![Zig](https://img.shields.io/badge/zig-0.16.0--dev-orange?style=flat&logo=zig)](https://ziglang.org/)
