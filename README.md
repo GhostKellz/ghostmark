@@ -9,6 +9,14 @@
 [![XML](https://img.shields.io/badge/XML-Parser-blue?style=flat&logo=xml)](https://en.wikipedia.org/wiki/XML)
 [![HTML](https://img.shields.io/badge/HTML-Processing-green?style=flat&logo=html5)](https://en.wikipedia.org/wiki/HTML)
 
+## DISCLAIMER
+
+⚠️ **EXPERIMENTAL LIBRARY - FOR LAB/PERSONAL USE** ⚠️
+
+This is an experimental library under active development. It is
+intended for research, learning, and personal projects. The API is subject
+to change!
+
 A high-performance, standards-compliant XML/HTML processing library written in Zig. Replaces C libraries like libxml2, pugixml, and expat.
 
 ## Features
