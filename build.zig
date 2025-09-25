@@ -16,10 +16,16 @@ pub fn build(b: *std.Build) void {
     // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall. Here we do not
     // set a preferred release mode, allowing the user to decide how to optimize.
     const optimize = b.standardOptimizeOption(.{});
-    // It's also possible to define more custom flags to toggle optional features
-    // of this build script using `b.option()`. All defined flags (including
-    // target and optimize options) will be listed when running `zig build --help`
-    // in this directory.
+
+    // GhostMark Feature Flags - Zig-style modular compilation
+    const enable_html = b.option(bool, "enable-html", "Enable HTML5 parsing support") orelse true;
+    const enable_xpath = b.option(bool, "enable-xpath", "Enable XPath query support") orelse true;
+    const enable_sax = b.option(bool, "enable-sax", "Enable SAX (streaming) parser") orelse true;
+    const enable_validation = b.option(bool, "enable-validation", "Enable schema validation") orelse false;
+    const enable_pretty_print = b.option(bool, "enable-pretty", "Enable pretty printing") orelse true;
+    const enable_namespaces = b.option(bool, "enable-namespaces", "Enable XML namespace support") orelse true;
+    const enable_comments = b.option(bool, "enable-comments", "Enable comment preservation") orelse true;
+    const minimal_build = b.option(bool, "minimal", "Minimal build (DOM parsing only)") orelse false;
 
     // This creates a module, which represents a collection of source files alongside
     // some compilation options, such as optimization mode and linked system libraries.
@@ -28,6 +34,17 @@ pub fn build(b: *std.Build) void {
     // to our consumers. We must give it a name because a Zig package can expose
     // multiple modules and consumers will need to be able to specify which
     // module they want to access.
+    // Create build options module to pass feature flags to source code
+    const build_options = b.addOptions();
+    build_options.addOption(bool, "enable_html", if (minimal_build) false else enable_html);
+    build_options.addOption(bool, "enable_xpath", if (minimal_build) false else enable_xpath);
+    build_options.addOption(bool, "enable_sax", if (minimal_build) false else enable_sax);
+    build_options.addOption(bool, "enable_validation", if (minimal_build) false else enable_validation);
+    build_options.addOption(bool, "enable_pretty_print", if (minimal_build) false else enable_pretty_print);
+    build_options.addOption(bool, "enable_namespaces", if (minimal_build) false else enable_namespaces);
+    build_options.addOption(bool, "enable_comments", if (minimal_build) false else enable_comments);
+    build_options.addOption(bool, "minimal_build", minimal_build);
+
     const mod = b.addModule("ghostmark", .{
         // The root source file is the "entry point" of this module. Users of
         // this module will only be able to access public declarations contained
@@ -39,6 +56,9 @@ pub fn build(b: *std.Build) void {
         // Later on we'll use this module as the root module of a test executable
         // which requires us to specify a target.
         .target = target,
+        .imports = &.{
+            .{ .name = "build_options", .module = build_options.createModule() },
+        },
     });
 
     // Here we define an executable. An executable needs to have a root module
@@ -79,6 +99,7 @@ pub fn build(b: *std.Build) void {
                 // can be extremely useful in case of collisions (which can happen
                 // importing modules from different packages).
                 .{ .name = "ghostmark", .module = mod },
+                .{ .name = "build_options", .module = build_options.createModule() },
             },
         }),
     });
