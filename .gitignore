@@ -3,3 +3,7 @@
 *.o
 *.exe
 CLAUDE.md
+TODO.md 
+ROADMAP.md 
+.zig-cache/
+zig-out/

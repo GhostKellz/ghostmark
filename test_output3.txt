@@ -1,0 +1,19 @@
+test
++- run test
+   +- compile test Debug native 1 errors
+tests/integration_tests.zig:117:22: error: expected 2 argument(s), found 1
+            std.debug.print("  UNEXPECTED SUCCESS - should have failed!\n");
+            ~~~~~~~~~^~~~~~
+/opt/zig-0.16.0-dev/lib/std/debug.zig:225:5: note: function declared here
+pub fn print(comptime fmt: []const u8, args: anytype) void {
+~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+error: the following command failed with 1 compilation errors:
+/opt/zig-0.16.0-dev/zig test -ODebug --dep ghostmark -Mroot=/data/projects/ghostmark/tests/integration_tests.zig --dep build_options -Mghostmark=/data/projects/ghostmark/src/root.zig -Mbuild_options=.zig-cache/c/d3766f94856b701b2145963c4dd6ff4b/options.zig --cache-dir .zig-cache --global-cache-dir /home/chris/.cache/zig --name test --zig-lib-dir /opt/zig-0.16.0-dev/lib/ --listen=-
+
+Build Summary: 5/8 steps succeeded; 1 failed; 27/27 tests passed
+test transitive failure
++- run test transitive failure
+   +- compile test Debug native 1 errors
+
+error: the following build command failed with exit code 1:
+.zig-cache/o/b27a86d6145796f0465b51f12e7f6d9a/build /opt/zig-0.16.0-dev/zig /opt/zig-0.16.0-dev/lib /data/projects/ghostmark .zig-cache /home/chris/.cache/zig --seed 0x668dcf45 -Z983f74f1ca0e8ae0 test

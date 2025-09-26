@@ -1,0 +1,20 @@
+test
++- run test
+   +- compile test Debug native 1 errors
+/opt/zig-0.16.0-dev/lib/std/Io/Writer.zig:1354:21: error: cannot format slice without a specifier (i.e. {s}, {x}, {b64}, or {any})
+                    @compileError("cannot format slice without a specifier (i.e. {s}, {x}, {b64}, or {any})");
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+referenced by:
+    print__anon_5232: /opt/zig-0.16.0-dev/lib/std/Io/Writer.zig:701:25
+    print__anon_2128: /opt/zig-0.16.0-dev/lib/std/debug.zig:229:23
+    1 reference(s) hidden; use '-freference-trace=3' to see all references
+error: the following command failed with 1 compilation errors:
+/opt/zig-0.16.0-dev/zig test -ODebug --dep ghostmark -Mroot=/data/projects/ghostmark/tests/integration_tests.zig --dep build_options -Mghostmark=/data/projects/ghostmark/src/root.zig -Mbuild_options=.zig-cache/c/d3766f94856b701b2145963c4dd6ff4b/options.zig --cache-dir .zig-cache --global-cache-dir /home/chris/.cache/zig --name test --zig-lib-dir /opt/zig-0.16.0-dev/lib/ --listen=-
+
+Build Summary: 5/8 steps succeeded; 1 failed; 27/27 tests passed
+test transitive failure
++- run test transitive failure
+   +- compile test Debug native 1 errors
+
+error: the following build command failed with exit code 1:
+.zig-cache/o/b27a86d6145796f0465b51f12e7f6d9a/build /opt/zig-0.16.0-dev/zig /opt/zig-0.16.0-dev/lib /data/projects/ghostmark .zig-cache /home/chris/.cache/zig --seed 0x345e576 -Zc87148289f9c3c42 test

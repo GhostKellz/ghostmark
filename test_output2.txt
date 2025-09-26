@@ -1,0 +1,283 @@
+test
++- run test 4/7 passed, 3 failed, 1 leaked
+error: 'integration_tests.test.malformed XML error handling' failed: Found 0 processing instructions
+
+Parsed 5 elements in 215357 ns
+/data/projects/ghostmark/src/root.zig:468:9: 0x10e6df8 in parseEndTag (root.zig)
+        return ParseError.MismatchedTag;
+        ^
+/data/projects/ghostmark/src/root.zig:371:21: 0x10bc60a in parseElement (root.zig)
+                    try parseEndTag(ctx, elem.name);
+                    ^
+/data/projects/ghostmark/src/root.zig:391:35: 0x10bd320 in parseElement (root.zig)
+                    const child = try parseElement(ctx, mode);
+                                  ^
+/data/projects/ghostmark/src/root.zig:247:20: 0x108b870 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                   ^
+/data/projects/ghostmark/src/root.zig:206:5: 0x1063bc2 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+    ^
+/data/projects/ghostmark/src/root.zig:199:5: 0x1045a3b in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+    ^
+/data/projects/ghostmark/src/root.zig:436:9: 0x10e63ac in parseAttribute (root.zig)
+        return ParseError.InvalidAttribute;
+        ^
+/data/projects/ghostmark/src/root.zig:352:13: 0x10bc2c7 in parseElement (root.zig)
+            try parseAttribute(ctx, elem);
+            ^
+/data/projects/ghostmark/src/root.zig:391:35: 0x10bd320 in parseElement (root.zig)
+                    const child = try parseElement(ctx, mode);
+                                  ^
+/data/projects/ghostmark/src/root.zig:247:20: 0x108b870 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                   ^
+/data/projects/ghostmark/src/root.zig:206:5: 0x1063bc2 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+    ^
+/data/projects/ghostmark/src/root.zig:199:5: 0x1045a3b in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+    ^
+/data/projects/ghostmark/src/root.zig:507:21: 0x10e906d in parseText (root.zig)
+                    return ParseError.InvalidEntityReference;
+                    ^
+/data/projects/ghostmark/src/root.zig:396:30: 0x10bd65e in parseElement (root.zig)
+                const text = try parseText(ctx);
+                             ^
+/data/projects/ghostmark/src/root.zig:247:20: 0x108b870 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                   ^
+/data/projects/ghostmark/src/root.zig:206:5: 0x1063bc2 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+    ^
+/data/projects/ghostmark/src/root.zig:199:5: 0x1045a3b in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+    ^
+/opt/zig-0.16.0-dev/lib/std/testing.zig:607:14: 0x103b019 in expect (std.zig)
+    if (!ok) return error.TestUnexpectedResult;
+             ^
+/data/projects/ghostmark/tests/integration_tests.zig:122:9: 0x11613b8 in test.malformed XML error handling (integration_tests.zig)
+        try std.testing.expect(std.meta.isError(result));
+        ^
+[gpa] (err): memory address 0x75da01ce0000 leaked: 
+/opt/zig-0.16.0-dev/lib/std/mem/Allocator.zig:436:40: 0x108a33e in dupe__anon_7272 (std.zig)
+    const new_buf = try allocator.alloc(T, m.len);
+                                       ^
+/data/projects/ghostmark/src/root.zig:116:39: 0x10bafb8 in init (root.zig)
+        elem.name = try allocator.dupe(u8, name);
+                                      ^
+/data/projects/ghostmark/src/root.zig:329:30: 0x10bb7a7 in parseElement (root.zig)
+    elem.* = try Element.init(ctx.allocator, full_name);
+                             ^
+/data/projects/ghostmark/src/root.zig:247:36: 0x108b844 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                                   ^
+/data/projects/ghostmark/src/root.zig:206:22: 0x1063b92 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+                     ^
+/data/projects/ghostmark/src/root.zig:199:25: 0x1045a0e in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+                        ^
+/data/projects/ghostmark/tests/integration_tests.zig:121:39: 0x11612f2 in test.malformed XML error handling (integration_tests.zig)
+        const result = ghostmark.parse(allocator, xml);
+                                      ^
+/opt/zig-0.16.0-dev/lib/compiler/test_runner.zig:130:29: 0x119a8de in mainServer (test_runner.zig)
+                test_fn.func() catch |err| switch (err) {
+                            ^
+/opt/zig-0.16.0-dev/lib/compiler/test_runner.zig:64:26: 0x119bb96 in main (test_runner.zig)
+        return mainServer() catch @panic("internal test runner failure");
+                         ^
+/opt/zig-0.16.0-dev/lib/std/start.zig:618:22: 0x119597d in posixCallMainAndExit (std.zig)
+            root.main();
+                     ^
+
+[gpa] (err): memory address 0x75da01cc0000 leaked: 
+/opt/zig-0.16.0-dev/lib/std/mem/Allocator.zig:436:40: 0x108a33e in dupe__anon_7272 (std.zig)
+    const new_buf = try allocator.alloc(T, m.len);
+                                       ^
+/data/projects/ghostmark/src/root.zig:520:34: 0x10e9640 in parseText (root.zig)
+    return try ctx.allocator.dupe(u8, result.items);
+                                 ^
+/data/projects/ghostmark/src/root.zig:396:43: 0x10bd565 in parseElement (root.zig)
+                const text = try parseText(ctx);
+                                          ^
+/data/projects/ghostmark/src/root.zig:391:51: 0x10bd227 in parseElement (root.zig)
+                    const child = try parseElement(ctx, mode);
+                                                  ^
+/data/projects/ghostmark/src/root.zig:247:36: 0x108b844 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                                   ^
+/data/projects/ghostmark/src/root.zig:206:22: 0x1063b92 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+                     ^
+/data/projects/ghostmark/src/root.zig:199:25: 0x1045a0e in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+                        ^
+/data/projects/ghostmark/tests/integration_tests.zig:121:39: 0x11612f2 in test.malformed XML error handling (integration_tests.zig)
+        const result = ghostmark.parse(allocator, xml);
+                                      ^
+/opt/zig-0.16.0-dev/lib/compiler/test_runner.zig:130:29: 0x119a8de in mainServer (test_runner.zig)
+                test_fn.func() catch |err| switch (err) {
+                            ^
+/opt/zig-0.16.0-dev/lib/compiler/test_runner.zig:64:26: 0x119bb96 in main (test_runner.zig)
+        return mainServer() catch @panic("internal test runner failure");
+                         ^
+
+[gpa] (err): memory address 0x75da01d00000 leaked: 
+/data/projects/ghostmark/src/root.zig:324:40: 0x10bb6a4 in parseElement (root.zig)
+    var elem = try ctx.allocator.create(Element);
+                                       ^
+/data/projects/ghostmark/src/root.zig:247:36: 0x108b844 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                                   ^
+/data/projects/ghostmark/src/root.zig:206:22: 0x1063b92 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+                     ^
+/data/projects/ghostmark/src/root.zig:199:25: 0x1045a0e in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+                        ^
+/data/projects/ghostmark/tests/integration_tests.zig:121:39: 0x11612f2 in test.malformed XML error handling (integration_tests.zig)
+        const result = ghostmark.parse(allocator, xml);
+                                      ^
+/opt/zig-0.16.0-dev/lib/compiler/test_runner.zig:130:29: 0x119a8de in mainServer (test_runner.zig)
+                test_fn.func() catch |err| switch (err) {
+                            ^
+/opt/zig-0.16.0-dev/lib/compiler/test_runner.zig:64:26: 0x119bb96 in main (test_runner.zig)
+        return mainServer() catch @panic("internal test runner failure");
+                         ^
+/opt/zig-0.16.0-dev/lib/std/start.zig:618:22: 0x119597d in posixCallMainAndExit (std.zig)
+            root.main();
+                     ^
+/opt/zig-0.16.0-dev/lib/std/start.zig:232:5: 0x1195211 in _start (std.zig)
+    asm volatile (switch (native_arch) {
+    ^
+
+[gpa] (err): memory address 0x75da01d00080 leaked: 
+/data/projects/ghostmark/src/root.zig:324:40: 0x10bb6a4 in parseElement (root.zig)
+    var elem = try ctx.allocator.create(Element);
+                                       ^
+/data/projects/ghostmark/src/root.zig:391:51: 0x10bd227 in parseElement (root.zig)
+                    const child = try parseElement(ctx, mode);
+                                                  ^
+/data/projects/ghostmark/src/root.zig:247:36: 0x108b844 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                                   ^
+/data/projects/ghostmark/src/root.zig:206:22: 0x1063b92 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+                     ^
+/data/projects/ghostmark/src/root.zig:199:25: 0x1045a0e in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+                        ^
+/data/projects/ghostmark/tests/integration_tests.zig:121:39: 0x11612f2 in test.malformed XML error handling (integration_tests.zig)
+        const result = ghostmark.parse(allocator, xml);
+                                      ^
+/opt/zig-0.16.0-dev/lib/compiler/test_runner.zig:130:29: 0x119a8de in mainServer (test_runner.zig)
+                test_fn.func() catch |err| switch (err) {
+                            ^
+/opt/zig-0.16.0-dev/lib/compiler/test_runner.zig:64:26: 0x119bb96 in main (test_runner.zig)
+        return mainServer() catch @panic("internal test runner failure");
+                         ^
+/opt/zig-0.16.0-dev/lib/std/start.zig:618:22: 0x119597d in posixCallMainAndExit (std.zig)
+            root.main();
+                     ^
+/opt/zig-0.16.0-dev/lib/std/start.zig:232:5: 0x1195211 in _start (std.zig)
+    asm volatile (switch (native_arch) {
+    ^
+
+[gpa] (err): memory address 0x75da01d00180 leaked: 
+/opt/zig-0.16.0-dev/lib/std/array_list.zig:1187:56: 0x114050e in ensureTotalCapacityPrecise (std.zig)
+                const new_memory = try gpa.alignedAlloc(T, alignment, new_capacity);
+                                                       ^
+/opt/zig-0.16.0-dev/lib/std/array_list.zig:1163:51: 0x112e245 in ensureTotalCapacity (std.zig)
+            return self.ensureTotalCapacityPrecise(gpa, growCapacity(self.capacity, new_capacity));
+                                                  ^
+/opt/zig-0.16.0-dev/lib/std/array_list.zig:1217:41: 0x111b46b in addOne (std.zig)
+            try self.ensureTotalCapacity(gpa, newlen);
+                                        ^
+/opt/zig-0.16.0-dev/lib/std/array_list.zig:892:49: 0x10e7d72 in append (std.zig)
+            const new_item_ptr = try self.addOne(gpa);
+                                                ^
+/data/projects/ghostmark/src/root.zig:398:45: 0x10bd770 in parseElement (root.zig)
+                    try elem.children.append(elem.allocator, .{ .text = text });
+                                            ^
+/data/projects/ghostmark/src/root.zig:391:51: 0x10bd227 in parseElement (root.zig)
+                    const child = try parseElement(ctx, mode);
+                                                  ^
+/data/projects/ghostmark/src/root.zig:247:36: 0x108b844 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                                   ^
+/data/projects/ghostmark/src/root.zig:206:22: 0x1063b92 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+                     ^
+/data/projects/ghostmark/src/root.zig:199:25: 0x1045a0e in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+                        ^
+/data/projects/ghostmark/tests/integration_tests.zig:121:39: 0x11612f2 in test.malformed XML error handling (integration_tests.zig)
+        const result = ghostmark.parse(allocator, xml);
+                                      ^
+
+[gpa] (err): memory address 0x75da01d00200 leaked: 
+/opt/zig-0.16.0-dev/lib/std/array_list.zig:1187:56: 0x114050e in ensureTotalCapacityPrecise (std.zig)
+                const new_memory = try gpa.alignedAlloc(T, alignment, new_capacity);
+                                                       ^
+/opt/zig-0.16.0-dev/lib/std/array_list.zig:1163:51: 0x112e245 in ensureTotalCapacity (std.zig)
+            return self.ensureTotalCapacityPrecise(gpa, growCapacity(self.capacity, new_capacity));
+                                                  ^
+/opt/zig-0.16.0-dev/lib/std/array_list.zig:1217:41: 0x111b46b in addOne (std.zig)
+            try self.ensureTotalCapacity(gpa, newlen);
+                                        ^
+/opt/zig-0.16.0-dev/lib/std/array_list.zig:892:49: 0x10e7d72 in append (std.zig)
+            const new_item_ptr = try self.addOne(gpa);
+                                                ^
+/data/projects/ghostmark/src/root.zig:392:45: 0x10bd41e in parseElement (root.zig)
+                    try elem.children.append(elem.allocator, .{ .element = child });
+                                            ^
+/data/projects/ghostmark/src/root.zig:247:36: 0x108b844 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                                   ^
+/data/projects/ghostmark/src/root.zig:206:22: 0x1063b92 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+                     ^
+/data/projects/ghostmark/src/root.zig:199:25: 0x1045a0e in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+                        ^
+/data/projects/ghostmark/tests/integration_tests.zig:121:39: 0x11612f2 in test.malformed XML error handling (integration_tests.zig)
+        const result = ghostmark.parse(allocator, xml);
+                                      ^
+/opt/zig-0.16.0-dev/lib/compiler/test_runner.zig:130:29: 0x119a8de in mainServer (test_runner.zig)
+                test_fn.func() catch |err| switch (err) {
+                            ^
+error: 'integration_tests.test.XPath complex queries' failed: /opt/zig-0.16.0-dev/lib/std/testing.zig:607:14: 0x103b019 in expect (std.zig)
+    if (!ok) return error.TestUnexpectedResult;
+             ^
+/data/projects/ghostmark/tests/integration_tests.zig:178:5: 0x116bf86 in test.XPath complex queries (integration_tests.zig)
+    try std.testing.expect(fiction_books.count() == 2);
+    ^
+error: 'integration_tests.test.HTML5 parsing features' failed: /data/projects/ghostmark/src/root.zig:418:9: 0x10e6169 in parseAttribute (root.zig)
+        return ParseError.InvalidAttribute;
+        ^
+/data/projects/ghostmark/src/root.zig:352:13: 0x10bc2c7 in parseElement (root.zig)
+            try parseAttribute(ctx, elem);
+            ^
+/data/projects/ghostmark/src/root.zig:247:20: 0x108b870 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                   ^
+/data/projects/ghostmark/src/root.zig:206:5: 0x1063bc2 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+    ^
+/data/projects/ghostmark/src/root.zig:1480:5: 0x116de2b in parseHtml (root.zig)
+    return parseWithMode(allocator, input, .html);
+    ^
+/data/projects/ghostmark/tests/integration_tests.zig:220:15: 0x116ce98 in test.HTML5 parsing features (integration_tests.zig)
+    var doc = try ghostmark.parseHtml(allocator, html);
+              ^
+error: while executing test 'integration_tests.test.namespace handling', the following test command failed:
+./.zig-cache/o/54d7c29edc20891cfa0a13b24108c535/test --cache-dir=./.zig-cache --seed=0xd8f659cb --listen=-
+
+Build Summary: 6/8 steps succeeded; 1 failed; 31/34 tests passed; 3 failed; 1 leaked
+test transitive failure
++- run test 4/7 passed, 3 failed, 1 leaked
+
+error: the following build command failed with exit code 1:
+.zig-cache/o/b27a86d6145796f0465b51f12e7f6d9a/build /opt/zig-0.16.0-dev/zig /opt/zig-0.16.0-dev/lib /data/projects/ghostmark .zig-cache /home/chris/.cache/zig --seed 0xd8f659cb -Z7e978b05dada7cf0 test

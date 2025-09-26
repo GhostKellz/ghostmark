@@ -1,0 +1,101 @@
+test
++- run test 4/7 passed, 3 failed
+error: 'integration_tests.test.malformed XML error handling' failed: Parsed 5 elements in 172088 ns
+Testing case 0: <root><unclosed></root>
+  Correctly failed with error: error.MismatchedTag
+Testing case 1: <root><empty attr="unclosed></root>
+  Correctly failed with error: error.InvalidAttribute
+Testing case 2: <root>&invalid;</root>
+  Correctly failed with error: error.InvalidEntityReference
+Testing case 3: <root><>invalid</></root>
+  UNEXPECTED SUCCESS - should have failed!
+/data/projects/ghostmark/src/root.zig:468:9: 0x10e5aa8 in parseEndTag (root.zig)
+        return ParseError.MismatchedTag;
+        ^
+/data/projects/ghostmark/src/root.zig:371:21: 0x10bb2ba in parseElement (root.zig)
+                    try parseEndTag(ctx, elem.name);
+                    ^
+/data/projects/ghostmark/src/root.zig:391:35: 0x10bbfd0 in parseElement (root.zig)
+                    const child = try parseElement(ctx, mode);
+                                  ^
+/data/projects/ghostmark/src/root.zig:247:20: 0x108a6e0 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                   ^
+/data/projects/ghostmark/src/root.zig:206:5: 0x1063272 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+    ^
+/data/projects/ghostmark/src/root.zig:199:5: 0x10453cb in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+    ^
+/data/projects/ghostmark/src/root.zig:436:9: 0x10e505c in parseAttribute (root.zig)
+        return ParseError.InvalidAttribute;
+        ^
+/data/projects/ghostmark/src/root.zig:352:13: 0x10baf77 in parseElement (root.zig)
+            try parseAttribute(ctx, elem);
+            ^
+/data/projects/ghostmark/src/root.zig:391:35: 0x10bbfd0 in parseElement (root.zig)
+                    const child = try parseElement(ctx, mode);
+                                  ^
+/data/projects/ghostmark/src/root.zig:247:20: 0x108a6e0 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                   ^
+/data/projects/ghostmark/src/root.zig:206:5: 0x1063272 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+    ^
+/data/projects/ghostmark/src/root.zig:199:5: 0x10453cb in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+    ^
+/data/projects/ghostmark/src/root.zig:507:21: 0x10e7d1d in parseText (root.zig)
+                    return ParseError.InvalidEntityReference;
+                    ^
+/data/projects/ghostmark/src/root.zig:396:30: 0x10bc30e in parseElement (root.zig)
+                const text = try parseText(ctx);
+                             ^
+/data/projects/ghostmark/src/root.zig:247:20: 0x108a6e0 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                   ^
+/data/projects/ghostmark/src/root.zig:206:5: 0x1063272 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+    ^
+/data/projects/ghostmark/src/root.zig:199:5: 0x10453cb in parse (root.zig)
+    return parseWithMode(allocator, input, .xml);
+    ^
+/opt/zig-0.16.0-dev/lib/std/testing.zig:607:14: 0x103b019 in expect (std.zig)
+    if (!ok) return error.TestUnexpectedResult;
+             ^
+/data/projects/ghostmark/tests/integration_tests.zig:120:13: 0x116012a in test.malformed XML error handling (integration_tests.zig)
+            try std.testing.expect(false); // Force failure
+            ^
+error: 'integration_tests.test.XPath complex queries' failed: /opt/zig-0.16.0-dev/lib/std/testing.zig:607:14: 0x103b019 in expect (std.zig)
+    if (!ok) return error.TestUnexpectedResult;
+             ^
+/data/projects/ghostmark/tests/integration_tests.zig:171:5: 0x116bb96 in test.XPath complex queries (integration_tests.zig)
+    try std.testing.expect(fiction_books.count() == 2);
+    ^
+error: 'integration_tests.test.HTML5 parsing features' failed: /data/projects/ghostmark/src/root.zig:418:9: 0x10e4e19 in parseAttribute (root.zig)
+        return ParseError.InvalidAttribute;
+        ^
+/data/projects/ghostmark/src/root.zig:352:13: 0x10baf77 in parseElement (root.zig)
+            try parseAttribute(ctx, elem);
+            ^
+/data/projects/ghostmark/src/root.zig:247:20: 0x108a6e0 in parseDocument (root.zig)
+        doc.root = try parseElement(ctx, mode);
+                   ^
+/data/projects/ghostmark/src/root.zig:206:5: 0x1063272 in parseWithMode (root.zig)
+    try parseDocument(&ctx, &doc, mode);
+    ^
+/data/projects/ghostmark/src/root.zig:1480:5: 0x116da3b in parseHtml (root.zig)
+    return parseWithMode(allocator, input, .html);
+    ^
+/data/projects/ghostmark/tests/integration_tests.zig:213:15: 0x116caa8 in test.HTML5 parsing features (integration_tests.zig)
+    var doc = try ghostmark.parseHtml(allocator, html);
+              ^
+error: while executing test 'integration_tests.test.namespace handling', the following test command failed:
+./.zig-cache/o/a3b187c8215595c9634d55d5f7210edc/test --cache-dir=./.zig-cache --seed=0x76a2f567 --listen=-
+
+Build Summary: 6/8 steps succeeded; 1 failed; 31/34 tests passed; 3 failed
+test transitive failure
++- run test 4/7 passed, 3 failed
+
+error: the following build command failed with exit code 1:
+.zig-cache/o/b27a86d6145796f0465b51f12e7f6d9a/build /opt/zig-0.16.0-dev/zig /opt/zig-0.16.0-dev/lib /data/projects/ghostmark .zig-cache /home/chris/.cache/zig --seed 0x76a2f567 -Zf677b17ce394bde0 test
