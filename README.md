@@ -29,16 +29,9 @@ A high-performance, standards-compliant XML/HTML processing library written in Z
 - **Standards Compliant**: Full support for XML and HTML specifications
 
 ## Installation
-
-Add to your `build.zig.zon`:
-
-```zig
-.dependencies = .{
-    .ghostmark = .{
-        .url = "https://github.com/ghostkellz/ghostmark/archive/main.tar.gz",
-        .hash = "...",
-    },
-},
+Add to your zig project with:
+```bash
+zig fetch --save https://github.com/ghostkellz/ghostmark/archive/main.tar.gz
 ```
 
 ## Usage
